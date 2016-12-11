@@ -1,0 +1,17 @@
+# Terms Table Description
+
+## Term
+
+- id **PRIMARY KEY**
+- term **STRING**
+- related_terms **STRING**?
+- definition **TEXT**
+- references **TEXT**
+- source **FK**?
+
+## Reference
+
+- id **PRIMARY KEY**
+- term **FK**?
+- passage **STRING**
+- description **STRING**
