@@ -7,3 +7,4 @@ id,slug,name,url,params
 6,gc-topics,All Topics,https://www.lds.org/general-conference/topics,
 7,true-to-the-faith,True to the Faith,https://www.lds.org/manual/true-to-the-faith,
 8,eom,Encyclopedia of Mormonism,http://eom.byu.edu/,index.php/Category:{}
+9,hymn-by-topic,Find a Hymn By Topic,https://www.lds.org/music/index/hymns/topic,/{}
