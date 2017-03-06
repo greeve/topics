@@ -1,3 +1,5 @@
+from models import Source, Term, Reference
+
 import collections
 import csv
 import string
@@ -42,12 +44,20 @@ def gather_data(source):
         parse_single(response)
 
 
+def save_html(source):
+    response = scrape_page(source.url)
+    filename = '{}.html'.format(source.slug)
+    with open(filename, 'wb') as fout:
+        fout.write(response.content)
+
 def main():
     with open(SOURCES) as fin:
         reader = csv.DictReader(fin, dialect='unix')
         Source = collections.namedtuple('Source', reader.fieldnames)
         for row in reader:
-            gather_data(Source(**row))
+            # gather_data(Source(**row))
+            save_html(Source(**row))
 
 if __name__ == "__main__":
     main()
+
