@@ -5,7 +5,6 @@ import csv
 import string
 
 import requests
-from bs4 import BeautifulSoup
 
 from . import utils
 
@@ -26,22 +25,24 @@ def download_page(url):
         response.raise_for_status()
 
 
-def gather_data(source):
+def create_urls(source):
     if source.params:
         for letter in ALPHA:
-            url = source.url + source.params.format(LANG, letter)
-            response = download_page(url)
-            soup = utils.make_soup(response)
-            term_url, term = utils.get(source.slug)(soup)
+            yield source.url + source.params.format(LANG, letter)
     else:
-        url = source.url
+        yield source.url
+
+
+def gather_data(source):
+    urls = list(create_urls(source))
+    for url in urls:
         response = download_page(url)
         soup = utils.make_soup(response)
-        term_url, term = utils.get(source.slug)(soup)
+        terms = list(utils.get(source.slug)(soup))
 
 
 def save_html(source):
-    response = scrape_page(source.url)
+    response = download_page(source.url)
     filename = '{}.html'.format(source.slug)
     with open(filename, 'wb') as fout:
         fout.write(response.content)
