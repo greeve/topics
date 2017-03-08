@@ -7,12 +7,14 @@ import string
 import requests
 from bs4 import BeautifulSoup
 
+from . import utils
+
 SOURCES = 'sources.csv'
 ALPHA = string.ascii_lowercase
 LANG = 'eng'
 
 
-def scrape_page(url):
+def download_page(url):
     try:
         response = requests.get(url)
     except Exception as e:
@@ -24,24 +26,18 @@ def scrape_page(url):
         response.raise_for_status()
 
 
-def parse_alpha(response):
-    pass
-
-
-def parse_single(response):
-    pass
-
-
 def gather_data(source):
     if source.params:
         for letter in ALPHA:
             url = source.url + source.params.format(LANG, letter)
-            response = scrape_page(url)
-            parse_alpha(response)
+            response = download_page(url)
+            soup = utils.make_soup(response)
+            term_url, term = utils.get(source.slug)(soup)
     else:
         url = source.url
-        response = scrape_page(url)
-        parse_single(response)
+        response = download_page(url)
+        soup = utils.make_soup(response)
+        term_url, term = utils.get(source.slug)(soup)
 
 
 def save_html(source):
@@ -50,13 +46,13 @@ def save_html(source):
     with open(filename, 'wb') as fout:
         fout.write(response.content)
 
+
 def main():
     with open(SOURCES) as fin:
         reader = csv.DictReader(fin, dialect='unix')
         Source = collections.namedtuple('Source', reader.fieldnames)
         for row in reader:
-            # gather_data(Source(**row))
-            save_html(Source(**row))
+            gather_data(Source(**row))
 
 if __name__ == "__main__":
     main()
