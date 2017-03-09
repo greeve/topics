@@ -9,8 +9,11 @@ def scrape_bd(soup):
 
 
 def scrape_eom(soup):
-    for index, item in enumerate(soup.find(id='mw-pages').find_all('li')):
-        yield (item.a['href'], item.a.text)
+    try:
+        for index, item in enumerate(soup.find(id='mw-pages').find_all('li')):
+            yield (item.a['href'], item.a.text)
+    except:
+        yield
 
 
 def scrape_gctopics(soup):
@@ -77,4 +80,4 @@ SOURCE_SLUGS = {
 }
 
 def make_soup(response):
-    return BeautifulSoup(response, 'html.parser')
+    return BeautifulSoup(response.text, 'html.parser')
