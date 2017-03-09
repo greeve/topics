@@ -6,7 +6,7 @@ import string
 
 import requests
 
-from . import utils
+import utils
 
 SOURCES = 'sources.csv'
 ALPHA = string.ascii_lowercase
@@ -28,17 +28,19 @@ def download_page(url):
 def create_urls(source):
     if source.params:
         for letter in ALPHA:
-            yield source.url + source.params.format(LANG, letter)
+            yield source.url + source.params.format(letter)
     else:
         yield source.url
 
 
 def gather_data(source):
     urls = list(create_urls(source))
+    print(source)
     for url in urls:
         response = download_page(url)
         soup = utils.make_soup(response)
-        terms = list(utils.get(source.slug)(soup))
+        terms = list(utils.SOURCE_SLUGS.get(source.slug)(soup))
+        print(terms)
 
 
 def save_html(source):
