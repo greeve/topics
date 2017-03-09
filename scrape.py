@@ -11,6 +11,7 @@ import utils
 SOURCES = 'sources.csv'
 ALPHA = string.ascii_lowercase
 LANG = 'eng'
+FILEPATH_TERMS = 'terms.csv'
 
 
 def download_page(url):
@@ -33,6 +34,14 @@ def create_urls(source):
         yield source.url
 
 
+def write_to_file(source, data, filename):
+    with open(filename, 'a', encoding='utf-8') as fout:
+        termwriter = csv.writer(fout, quotechar='"')
+        for term_url, term in data:
+            row = (source.slug, term, term_url)
+            termwriter.writerow(row)
+
+
 def gather_data(source):
     urls = list(create_urls(source))
     print(source)
@@ -40,7 +49,10 @@ def gather_data(source):
         response = download_page(url)
         soup = utils.make_soup(response)
         terms = list(utils.SOURCE_SLUGS.get(source.slug)(soup))
-        print(terms)
+        try:
+            write_to_file(source, terms, FILEPATH_TERMS)
+        except:
+            continue
 
 
 def save_html(source):
