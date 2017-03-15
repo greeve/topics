@@ -1,9 +1,9 @@
 id,slug,name,url,params
-1,gs,The Guide to the Scriptures,https://www.lds.org/scriptures/gs,?lang={}&letter={}
-2,triple-index,Index to the Triple Combination,https://www.lds.org/scriptures/triple-index,?lang={}&letter={}
-3,tg,Topical Guide,https://www.lds.org/scriptures/tg,?lang={}&letter={}
-4,bd,Bible Dictionary,https://www.lds.org/scriptures/bd,?lang={}&letter={}
-5,topics,Gospel Topics,https://www.lds.org/topics,?lang={}#letter={}
+1,gs,The Guide to the Scriptures,https://www.lds.org/scriptures/gs,?letter={}
+2,triple-index,Index to the Triple Combination,https://www.lds.org/scriptures/triple-index,?letter={}
+3,tg,Topical Guide,https://www.lds.org/scriptures/tg,?letter={}
+4,bd,Bible Dictionary,https://www.lds.org/scriptures/bd,?letter={}
+5,topics,Gospel Topics,https://www.lds.org/topics,?letter={}
 6,gc-topics,All Topics,https://www.lds.org/general-conference/topics,
 7,true-to-the-faith,True to the Faith,https://www.lds.org/manual/true-to-the-faith,
 8,eom,Encyclopedia of Mormonism,http://eom.byu.edu/,index.php/Category:{}
