@@ -4,29 +4,20 @@ class Reference:
         self.id = None
         self.label = None
         self.term = None
-
-
-class ScriptureReference(Reference):
-    
-    def __init__(self):
-        super().__init__()
+        
+        # scripture, hymn, or conference addess
+        self.category = None
+        
+        # Scripture reference fields
         self.volume = None
         self.book = None
         self.chapter = None
         self.verses = []
-
-
-class HymnReference(Reference):
-    
-    def __init__(self):
-        super().__init__()
+        
+        # Hymn reference field
         self.number = None
-
-
-class ConferenceReference(Reference):
-    
-    def __init__(self):
-        super().__init__()
+        
+        # Conference address fields
         self.year = None
         self.month = None
         self.session = None
@@ -43,6 +34,7 @@ class Term:
         self.description = None
         self.source = None
         self.related_terms = []
+        self.references = []
     
     @classmethod
     def from_response(self, **kwargs):
@@ -52,6 +44,7 @@ class Term:
         self.description = kwargs.get('description')
         self.source = kwargs.get('source')
         self.related_terms = kwargs.get('related_terms')
+        self.references = kwargs.get('references')
 
 
 class Source:
