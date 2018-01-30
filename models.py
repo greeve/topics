@@ -40,7 +40,6 @@ class Term:
         self.id = None
         self.label = None
         self.slug = None
-        self.url = None
         self.description = None
         self.source = None
         self.related_terms = []
@@ -50,7 +49,6 @@ class Term:
         self.id = kwargs.get('id')
         self.label = kwargs.get('label')
         self.slug = kwargs.get('slug')
-        self.url = kwargs.get('url')
         self.description = kwargs.get('description')
         self.source = kwargs.get('source')
         self.related_terms = kwargs.get('related_terms')
@@ -60,7 +58,6 @@ class Source:
     
     def __init__(self):
         self.id = None
-        self.slug = None
         self.name = None
         self.url = None
         self.params = None
@@ -68,7 +65,6 @@ class Source:
     @classmethod
     def from_response(self, **kwargs):
         self.id = kwargs.get('id')
-        self.slug = kwargs.get('slug')
         self.name = kwargs.get('name')
         self.url = kwargs.get('url')
         self.params = kwargs.get('params')
