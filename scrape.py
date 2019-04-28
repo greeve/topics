@@ -35,8 +35,10 @@ def create_urls(source):
 
 
 def write_to_file(source, data, filename):
+    header_fields = ['source', 'term', 'uri']
     with open(filename, 'a', encoding='utf-8') as fout:
         termwriter = csv.writer(fout, quotechar='"')
+        termwriter.writerow(header_fields)
         for term_url, term in data:
             row = (source.slug, term, term_url)
             termwriter.writerow(row)
@@ -51,7 +53,7 @@ def gather_data(source):
         terms = list(utils.SOURCE_SLUGS.get(source.slug)(soup))
         try:
             write_to_file(source, terms, FILEPATH_TERMS)
-        except:
+        except Exception:
             continue
 
 
@@ -69,6 +71,6 @@ def main():
         for row in reader:
             gather_data(Source(**row))
 
+
 if __name__ == "__main__":
     main()
-

@@ -1,22 +1,22 @@
 class Reference:
-    
+
     def __init__(self):
         self.id = None
         self.label = None
         self.term = None
-        
+
         # scripture, hymn, or conference addess
         self.category = None
-        
+
         # Scripture reference fields
         self.volume = None
         self.book = None
         self.chapter = None
         self.verses = []
-        
+
         # Hymn reference field
         self.number = None
-        
+
         # Conference address fields
         self.year = None
         self.month = None
@@ -26,7 +26,7 @@ class Reference:
 
 
 class Term:
-    
+
     def __init__(self):
         self.id = None
         self.label = None
@@ -35,7 +35,7 @@ class Term:
         self.source = None
         self.related_terms = []
         self.references = []
-    
+
     @classmethod
     def from_response(self, **kwargs):
         self.id = kwargs.get('id')
@@ -48,7 +48,7 @@ class Term:
 
 
 class Source:
-    
+
     def __init__(self):
         self.id = None
         self.name = None

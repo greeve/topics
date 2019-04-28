@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 
 URL_HYMNS = 'https://www.lds.org/music/index/hymns/topic?lang=eng'
+URL_EOM = 'https://eom.byu.edu'
 
 
 def scrape_bd(soup):
@@ -11,8 +12,8 @@ def scrape_bd(soup):
 def scrape_eom(soup):
     try:
         for index, item in enumerate(soup.find(id='mw-pages').find_all('li')):
-            yield (item.a['href'], item.a.text)
-    except:
+            yield ('{}{}'.format(URL_EOM, item.a['href']), item.a.text)
+    except Exception:
         yield
 
 
