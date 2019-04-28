@@ -35,10 +35,8 @@ def create_urls(source):
 
 
 def write_to_file(source, data, filename):
-    header_fields = ['source', 'term', 'uri']
     with open(filename, 'a', encoding='utf-8') as fout:
         termwriter = csv.writer(fout, quotechar='"')
-        termwriter.writerow(header_fields)
         for term_url, term in data:
             row = (source.slug, term, term_url)
             termwriter.writerow(row)
@@ -47,10 +45,17 @@ def write_to_file(source, data, filename):
 def gather_data(source):
     urls = list(create_urls(source))
     print(source)
+
     for url in urls:
         response = download_page(url)
         soup = utils.make_soup(response)
-        terms = list(utils.SOURCE_SLUGS.get(source.slug)(soup))
+
+        try:
+            terms = list(utils.SOURCE_SLUGS.get(source.slug)(soup))
+        except Exception:
+            print(soup)
+            raise
+
         try:
             write_to_file(source, terms, FILEPATH_TERMS)
         except Exception:
@@ -65,6 +70,11 @@ def save_html(source):
 
 
 def main():
+    # Write the output file with a heading row
+    with open(FILEPATH_TERMS, 'w', encoding='utf-8') as fout:
+        termwriter = csv.writer(fout, quotechar='"')
+        termwriter.writerow(['source', 'term', 'url'])
+
     with open(SOURCES) as fin:
         reader = csv.DictReader(fin, dialect='unix')
         Source = collections.namedtuple('Source', reader.fieldnames)

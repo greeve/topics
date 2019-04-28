@@ -5,7 +5,7 @@ URL_EOM = 'https://eom.byu.edu'
 
 
 def scrape_bd(soup):
-    for index, item in enumerate(soup.find(id='primary').ul.find_all('li')):
+    for index, item in enumerate(soup.find(id='primary').find_all('ul', class_='topics guide')[0].children):  # noqa
         yield (item.a['href'], item.a.text)
 
 
