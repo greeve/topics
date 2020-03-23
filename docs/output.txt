@@ -1,0 +1,32 @@
+# Single HTML File
+
+## Folder structure
+
+- <slug>
+    - <slug>.html
+
+## Sources
+
+- 1,gs,The Guide to the Scriptures,https://www.churchofjesuschrist.org/study/scriptures/gs?lang=eng,
+- 2,triple-index,Index to the Triple Combination,https://www.churchofjesuschrist.org/study/scriptures/triple-index?lang=eng,
+- 3,tg,Topical Guide,https://www.churchofjesuschrist.org/study/scriptures/tg?lang=eng,
+- 4,bd,Bible Dictionary,https://www.churchofjesuschrist.org/study/scriptures/bd?lang=eng,
+- 5,topics,Gospel Topics,https://www.churchofjesuschrist.org/study/manual/gospel-topics?lang=eng,
+- 6,gc-topics,All Topics,https://www.churchofjesuschrist.org/general-conference/topics?lang=eng,
+- 7,true-to-the-faith,True to the Faith,https://www.churchofjesuschrist.org/study/manual/true-to-the-faith?lang=eng,
+- 9,hymn-by-topic,Find a Hymn By Topic,https://www.churchofjesuschrist.org/music/index/hymns/topic?lang=eng,
+
+# Multiple HTML Files
+
+## Folder Structure
+
+- <slug>
+    - A.html
+    - B.html
+    - C.html
+    - D.html
+    ...
+
+## Sources
+
+8,eom,Encyclopedia of Mormonism,https://eom.byu.edu/,index.php/Category:{}

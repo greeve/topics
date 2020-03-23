@@ -1,4 +1,4 @@
-from models import Source, Term, Reference
+# from models import Source, Term, Reference
 
 import collections
 import csv

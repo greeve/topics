@@ -1,7 +1,22 @@
+import string
+
 from bs4 import BeautifulSoup
 
+ALPHA = string.ascii_lowercase
 URL_HYMNS = 'https://www.lds.org/music/index/hymns/topic?lang=eng'
 URL_EOM = 'https://eom.byu.edu'
+
+
+def create_urls(source):
+    if source.params:
+        for letter in ALPHA:
+            yield source.url + source.params.format(letter)
+    else:
+        yield source.url
+
+
+def make_soup(response):
+    return BeautifulSoup(response.text, 'html.parser')
 
 
 def scrape_bd(soup):
@@ -80,5 +95,3 @@ SOURCE_SLUGS = {
     'hymn-by-topic': scrape_hymntopics,
 }
 
-def make_soup(response):
-    return BeautifulSoup(response.text, 'html.parser')
