@@ -36,8 +36,10 @@ def download_data(source, output):
 
     for url in urls:
         response = download_page(url)
-        if source.params:
+        if source.slug == 'eom':
             filename = '{}.html'.format(url.split('/')[-1].split(':')[-1])
+        elif source.slug == 'hymn-by-topic':
+            filename = '{}.html'.format(url.split('/')[-1].split('?')[0])
         else:
             filename = '{}.html'.format(source.slug)
         with open(source_output / filename, 'wb') as fout:
