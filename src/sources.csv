@@ -7,4 +7,4 @@ id,slug,name,url,params
 6,gc-topics,All Topics,https://www.churchofjesuschrist.org/general-conference/topics?lang=eng,
 7,true-to-the-faith,True to the Faith,https://www.churchofjesuschrist.org/study/manual/true-to-the-faith?lang=eng,
 8,eom,Encyclopedia of Mormonism,https://eom.byu.edu/,index.php/Category:{}
-9,hymn-by-topic,Find a Hymn By Topic,https://www.churchofjesuschrist.org/music/index/hymns/topic?lang=eng,
+9,hymn-by-topic,Find a Hymn By Topic,https://www.churchofjesuschrist.org/music/index/hymns/topic,/{}?lang=eng&_r=1
