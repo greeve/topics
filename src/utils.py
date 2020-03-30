@@ -15,13 +15,22 @@ def create_urls(source):
         yield source.url
 
 
-def make_soup(response):
+def make_soup_from_http(response):
     return BeautifulSoup(response.text, 'html.parser')
 
 
+def make_soup_from_file(filepath):
+    soup = None
+    with open(filepath) as fin:
+        soup = BeautifulSoup(fin, 'html.parser')
+    return soup
+
+
 def scrape_bd(soup):
-    for index, item in enumerate(soup.find(id='primary').find_all('ul', class_='topics guide')[0].children):  # noqa
-        yield (item.a['href'], item.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 def scrape_eom(soup):
@@ -39,10 +48,10 @@ def scrape_gctopics(soup):
 
 
 def scrape_gs(soup):
-    for ul in soup.find(id='primary').find_all('ul'):
-        if ['topics', 'guide'] == ul.get('class', []):
-            for index, li in enumerate(ul.find_all('li')):
-                yield (li.a.get('href'), li.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 def scrape_hymntopics(soup):
@@ -54,33 +63,31 @@ def scrape_hymntopics(soup):
 
 
 def scrape_tg(soup):
-    for ul in soup.find(id='primary').find_all('ul'):
-        if ['topics', 'guide'] == ul.get('class', []):
-            for index, li in enumerate(ul.find_all('li')):
-                yield (li.a.get('href'), li.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 def scrape_topics(soup):
-    for div in soup.find_all('div'):
-        if ['topic-index__full'] == div.get('class', []):
-            for index, li in enumerate(div.find_all('li')):
-                yield (li.a.get('href'), li.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 def scrape_tripleindex(soup):
-    for ul in soup.find(id='primary').find_all('ul'):
-        if ['topics', 'guide'] == ul.get('class', []):
-            for index, li in enumerate(ul.find_all('li')):
-                yield (li.a.get('href'), li.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 def scrape_truetothefaith(soup):
-    for tr in soup.find(id='primary').find_all('table')[0].find_all('tr'):
-        tds = tr.find_all('td')
-        if len(tds) > 1:
-            td = tds[1]
-            if td.a and 'Message from the First Presidency' not in td.a.text:
-                yield (td.a['href'], td.a.text)
+    content = soup.find(id='content')
+    for ul in content.find_all(class_='doc-map'):
+        for index, li in enumerate(ul.find_all('li')):
+            yield (li.a.get('href'), li.a.text)
 
 
 SOURCE_SLUGS = {
